@@ -24,12 +24,12 @@ const Navbar = ({ darkToggle, setDarkToggle, currentBoard, newTask, setNewTask }
         />
         <DropdownMenu currentBoard={currentBoard} />
       </div>
-      <div className="flex flex-row justify-items-end space-x-2 ml-16">
+      <div className="flex flex-row justify-items-end space-x-2 ml-16 pr-4">
         <PLusButton newTask={newTask} setNewTask={setNewTask}/>
 
 
         <Image
-          width={3.69}
+          width={4.62}
           height={16}
           src="/assets/icon-vertical-ellipsis.svg"
           alt="Logo"
