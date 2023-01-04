@@ -27,12 +27,6 @@ const Navbar = ({ darkToggle, setDarkToggle, currentBoard, newTask, setNewTask }
       <div className="flex flex-row justify-items-end space-x-2 ml-16">
         <PLusButton newTask={newTask} setNewTask={setNewTask}/>
 
-        <button
-          className="bg-red-600"
-          onClick={() => setDarkToggle(!darkToggle)}
-        >
-          change
-        </button>
         <Image
           width={3.69}
           height={16}
