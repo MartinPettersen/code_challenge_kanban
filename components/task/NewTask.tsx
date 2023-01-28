@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import data from "../../data.json";
+import { useDispatch } from 'react-redux';
+import { toggle } from '../../slices/newTaskSlice'
+
 type Props = {
-  newTask: boolean;
-  setNewTask: Function;
+
 }
 
-const NewTask = ({newTask, setNewTask }: Props) => {
+const NewTask = (props: Props) => {
   const [refresh, setRefresh] = useState(false);
   const [title, setTitle] = useState("Title");
   const [description, setDescription] = useState("Description");
@@ -16,6 +18,7 @@ const NewTask = ({newTask, setNewTask }: Props) => {
   const [subTasks, setSubtasks] = useState(["1", "2"]);
   const statusList = ["Todo", "Doing", "Done", "Now", "Next", "Later"];
 
+  const dispatch = useDispatch();
 
   const editTitle = (event: any) => {
     console.log(event.target.value);
@@ -45,7 +48,7 @@ const NewTask = ({newTask, setNewTask }: Props) => {
   return (
     <div className=" w-full h-full z-10 flex items-center justify-center backdrop-filter backdrop-brightness-50">
       <div
-        onClick={() => setNewTask(!newTask)}
+        onClick={() => dispatch(toggle())}
         className=" z-500 fixed w-full h-full"
       ></div>
       <div

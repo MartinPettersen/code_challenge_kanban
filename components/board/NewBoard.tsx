@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import data from "../../data.json";
+import { useDispatch } from 'react-redux';
+import { toggle } from '../../slices/newBoardSlice'
 
 type Props = {
-  newBoard: boolean;
-  setNewBoard: Function;
+
 };
 
 type Columns = {
@@ -20,7 +21,10 @@ type Columns = {
   }[];
 }[]
 
-const NewBoard = ({ newBoard, setNewBoard }: Props) => {
+const NewBoard = (props: Props) => {
+  const dispatch = useDispatch();
+
+
   const [columns, setColumns] = useState([{name:"e.g. Learn React", tasks: [{
     title: "title",
     description: "description",
@@ -83,7 +87,7 @@ const NewBoard = ({ newBoard, setNewBoard }: Props) => {
   return (
     <div className=" w-full h-full z-10 flex items-center justify-center backdrop-filter backdrop-brightness-50">
       <div
-        onClick={() => setNewBoard(!newBoard)}
+        onClick={() => dispatch(toggle())}
         className=" z-500 fixed w-full h-full"
       ></div>
       <div

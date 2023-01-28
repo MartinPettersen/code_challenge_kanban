@@ -10,22 +10,28 @@ import styles from "../styles/Home.module.css";
 import data from "../data.json"
 import NewBoard from "../components/board/NewBoard";
 import NewTask from "../components/task/NewTask";
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState } from '../store'
+import { selectDarkmode } from "../slices/darkmodeSlice";
+import { selectSidebar } from "../slices/sidebarSlice";
+import { selectNewTaskToggle } from '../slices/newTaskSlice';
+import { selectNewBoardToggle } from '../slices/newBoardSlice';
+
+
 
 export default function Home() {
-  const [darkToggle, setDarkToggle] = useState(true);
-  const [sidebarToggle, setSidebarToggle] = useState(true);
   const [currentBoard, setCurrentBoard] = useState(data.boards.length === 0 ? -1 : 0);
-  const [newTask, setNewTask] = useState(false);
-  const [newBoard, setNewBoard] = useState(false);
 
-
-
+  const darkmodeToggle = useSelector(selectDarkmode)
+  const sidebarToggle = useSelector(selectSidebar)
+  const newTaskToggle = useSelector(selectNewTaskToggle);
+  const newBoardToggle = useSelector(selectNewBoardToggle);
 
   return (
     <div className="absolute inset-0 ">
-      <div className={`z-0 w-full  ${darkToggle && "dark"} `}>
+      <div className={`z-0 w-full  ${darkmodeToggle && "dark"} `}>
         <Head>
-          <title>Create Next App</title>
+          <title>Kanban Task Managment Challenge Frontend Mentor</title>
           <meta
             name="description"
             content="Frontend Mentor | Kanban task management web app"
@@ -38,20 +44,20 @@ export default function Home() {
           />
         </Head>
         <div className="h-full flex flex-row">
-          {sidebarToggle ? <Sidebar sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle} darkToggle={darkToggle} setDarkToggle={setDarkToggle} setCurrentBoard={setCurrentBoard} newBoard={newBoard} setNewBoard={setNewBoard}/> : 
-          <HiddenSidebar sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle}/>
+          {sidebarToggle ? <Sidebar setCurrentBoard={setCurrentBoard} /> : 
+          <HiddenSidebar />
           }
 
           
           <div className=" h-[100vh]  md:ml-[-261px] lg:ml-[-300px] bg-[#E4EBFA] dark:bg-[#20212C]">
-            <Navbar darkToggle={darkToggle} setDarkToggle={setDarkToggle} currentBoard={currentBoard} newTask={newTask} setNewTask={setNewTask} />
+            <Navbar  currentBoard={currentBoard} />
             <Container sidebarToggle={sidebarToggle} currentBoard={currentBoard}/>
-            { newBoard ? 
-        <div className="w-full h-full fixed inset-0 z-50 "> <NewBoard newBoard={newBoard} setNewBoard={setNewBoard} /></div>
+            { newBoardToggle ? 
+        <div className="w-full h-full fixed inset-0 z-50 "> <NewBoard  /></div>
         :
         <div></div>
-      }{ newTask ? 
-        <div className="w-full h-full fixed inset-0 z-50 "> <NewTask newTask={newTask} setNewTask={setNewTask} /></div>
+      }{ newTaskToggle ? 
+        <div className="w-full h-full fixed inset-0 z-50 "> <NewTask /></div>
         :
         <div></div>
       }

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import data from "../../data.json";
+import { useDispatch } from 'react-redux';
+import { toggle } from '../../slices/newBoardSlice'
 
 type Props = {
   setCurrentBoard: Function;
-  newBoard: boolean;
-  setNewBoard: Function;
 };
 
-const BoardContainer = ({setCurrentBoard, newBoard, setNewBoard}: Props) => {
-
+const BoardContainer = ({setCurrentBoard}: Props) => {
+  const dispatch = useDispatch();
 
 
   return (
@@ -43,7 +43,7 @@ const BoardContainer = ({setCurrentBoard, newBoard, setNewBoard}: Props) => {
             fill="#635FC7"
           />
         </svg>
-        <p  onClick={() => setNewBoard(!newBoard)} className="ml-2">+Create New Board</p>
+        <p  onClick={() => dispatch(toggle())} className="ml-2">+Create New Board</p>
       </div>
     </div>
   );

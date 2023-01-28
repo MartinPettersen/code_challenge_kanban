@@ -1,14 +1,17 @@
 import React from 'react'
 import Image from "next/image";
+import { useDispatch } from 'react-redux';
+import { toggle } from '../../slices/sidebarSlice'
 
 type Props = {  
-  sidebarToggle: boolean ;
-  setSidebarToggle: Function;
+
 }
 
-const SidebarHidder = ({setSidebarToggle, sidebarToggle}: Props) => {
+const SidebarHidder = (props: Props) => {
+  const dispatch = useDispatch();
+  
   return (
-    <div onClick={() => setSidebarToggle(!sidebarToggle)} className="flex flex-row ">
+    <div onClick={() => dispatch(toggle())} className="flex flex-row ">
         <Image
             
             width={24}
